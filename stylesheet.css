@@ -99,3 +99,29 @@ h2 {
     border: 2px solid limegreen;
     pointer-events: none; /* Voorkomt verdere clicks op deze kaarten */
   }
+
+  .scoreBoard {
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    border: 40px;
+    background-color: red;
+    font-size: 2em;
+    right: 10px;
+    border-radius: 20px;
+  }
+
+
+  .score-box{
+    padding: 30px;
+  }
+
+  .scoreBoard h1 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .tekstclick{
+    font-size: 2em;
+  }
+   

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     //scores is een array exmp: [6,34]
     const printScore = (scores) => {
-        
+        document.querySelector('.scoreBoard').innerHTML = '<h1>Score board</h1>';
         for (let i = 0; i < scores.length; i++) { //forloop
             let scoreBox = document.createElement('div'); //zet html code voor div klaar
             scoreBox.className = 'score-box'; //classe naam op scorebox
@@ -71,6 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         if (document.querySelectorAll('.boxMatch').length === shuffleKaarten.length) { //kijkt of je hebt gewonnen
                             scoreList.push(Math.floor(clickCounter / 2)); //voeg score toe aan array
+                            // Verwijder scores totdat er maximaal 5 overblijven
+                        
+                        if (scoreList.length > 5) {
+                            scoreList = []; // Verwijdert het oudste (eerste) item in de lijst
+                        }
                             localStorage.setItem('scores', JSON.stringify(scoreList)); //slaat de score op in memory
                             printScore(scoreList); //roept funcite aan voor updaten van scorelist
                             alert('Gewonnen!'); //functie alert -> popup
