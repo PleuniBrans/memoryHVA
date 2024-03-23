@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #32278D;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    background: white;
+    padding: 40px 60px;
+}
+
+h2 {
+    font-size: 3em;
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.reset {
+    padding: 15px 20px;
+    color: white;
+    background: #32278D;
+    border: none;
+    font-size: 1.5em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.reset:focus {
+    color: white;
+    background: #4F48E5;
+}
+
+.game {
+    width: 430px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+
+.item {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    background-color: blue; 
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  
+  .item::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: orange; 
+    /* opacity: ; */
+    transform: rotateY(0deg);
+    backface-visibility: hidden; 
+  }
+  
+  .item img {
+    width: 100%;
+    height: auto;
+    backface-visibility: hidden;
+    transform: rotateY(180deg); 
+  }
+  
+  .boxOpen {
+    transform: rotateY(180deg); 
+  }
+  
+  .boxMatch {
+    transform: rotateY(180deg); 
+    /* Optionele stijl om te laten zien dat dit een gematchte kaart is, bijvoorbeeld een groene rand */
+    border: 2px solid limegreen;
+    pointer-events: none; /* Voorkomt verdere clicks op deze kaarten */
+  }
