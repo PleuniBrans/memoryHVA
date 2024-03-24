@@ -90,11 +90,11 @@ h2 {
     transform: rotateY(180deg); 
   }
   
-  .boxOpen {
+  .cardFlipped {
     transform: rotateY(180deg); 
   }
   
-  .boxMatch {
+  .keuzeCorrect {
     transform: rotateY(180deg); 
     /* Optionele stijl om te laten zien dat dit een gematchte kaart is, bijvoorbeeld een groene rand */
     border: 2px solid limegreen;

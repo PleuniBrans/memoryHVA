@@ -1,31 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    //scores is een array exmp: [6,34]
+    
+    // Functie om scores te weergeven in het scorebord
     const printScore = (scores) => {
         document.querySelector('.scoreBoard').innerHTML = '<h1>Score board</h1>';
-        for (let i = 0; i < scores.length; i++) { //forloop
-            let scoreBox = document.createElement('div'); //zet html code voor div klaar
-            scoreBox.className = 'score-box'; //classe naam op scorebox
-            scoreBox.innerText = scores[i]; //zet innertekst gelijk aan scores positie i
-            document.querySelector('.scoreBoard').appendChild(scoreBox); //voeg een sub element toe aan een element met klasse scoreboard.
-    
+        for (let kaartIndex = 0; kaartIndex < scores.length; kaartIndex++) {
+            let scoreBox = document.createElement('div'); 
+            scoreBox.className = 'score-box'; 
+            scoreBox.innerText = scores[kaartIndex]; 
+            document.querySelector('.scoreBoard').appendChild(scoreBox); 
+
         }
-    } 
-    
-    //reset als je pagina refresht
-    let clickCounter = 0;
-    let scoreList = localStorage.getItem('scores'); //check in de browser of scores bestaat (browser memory)
-    if(scoreList === null){ //controleert of scorelijst bestaat
-        scoreList = []; //bestaat niet -> maak aan als lege lijst
-        localStorage.setItem('scores', JSON.stringify(scoreList)); //maak van array een string en sla op in memory
-    }else{
-        scoreList = JSON.parse(scoreList); //bestaat wel in de memory -> maak van de string een array
     }
 
-    printScore(scoreList); //functie aangeroepen (soms lege array, soms lijst uit memory)
+    // Zet de scorebord titel en toont elke score in een nieuw vakje
+    let clickCounter = 0;
+    let scoreList = localStorage.getItem('scores');
+    if (scoreList === null) { 
+        scoreList = []; 
+        localStorage.setItem('scores', JSON.stringify(scoreList)); 
+    } else {
+        scoreList = JSON.parse(scoreList); 
+    }
+
+    printScore(scoreList); 
 
 
-
-    const kaartAfb = [ //array van kaartjes
+// Lijst van kaartafbeeldingen voor memory
+    const kaartAfb = [ 
         'images/beker-kleur.svg',
         'images/beker-kleur.svg',
         'images/eenhoorn-kleur.svg',
@@ -44,53 +45,62 @@ document.addEventListener('DOMContentLoaded', () => {
         'images/raket-kleur.svg'
     ];
 
-  
-    const shuffleKaarten = kaartAfb.sort(() => Math.random() > 0.5 ? 1 : -1);   // Schud de kaarten
+    // Schudt de kaarten willekeurig
+    const shuffleKaarten = kaartAfb.sort(() => Math.random() > 0.5 ? 1 : -1); 
 
-    for (let i = 0; i < shuffleKaarten.length; i++) { //forloop stel in ; check of dit waar is; hoeveel erbij komt
-        let box = document.createElement('div'); //maakt de <div> aan
-        box.className = 'item'; //geeft een klasse met de naam item
-        let img = document.createElement('img'); //maakt <img> aan
-        img.src = shuffleKaarten[i]; //[] positie van lijst '1' = +1
-        box.appendChild(img); //stop supelement in de box (spreekt div aan)
+    // Maakt en toont elke kaart in het spel.
+    for (let kaartIndex = 0; kaartIndex < shuffleKaarten.length; kaartIndex++) { 
+        let box = document.createElement('div'); 
+        box.className = 'item'; 
+        let img = document.createElement('img'); 
+        img.src = shuffleKaarten[kaartIndex]; 
+        box.appendChild(img); 
 
-        box.addEventListener('click', function() { //op het element wordt er geluisterd als er wordt geklikt
-            clickCounter++; //elke keer als je klikt komt er +1 bij
-            document.querySelector('.clickCounter').innerText = Math.floor(clickCounter / 2); //zoekt een actief element met de klasse clickcounter, stelt de inner text gelijk aan naar beneden afgerond clickcounter : 2
-            this.classList.add('boxOpen'); //zet op de box de klasse 'boxOpen'
-            let openCards = document.querySelectorAll('.boxOpen'); //selcteert alle elementen met de klasse 'boxOpen'
-            if (openCards.length === 2) { //bij het openen van tweede kaart.
-                setTimeout(() => {  //0.5 sec wachten (set timer). (function)
-                    if (openCards[0].querySelector('img').src === openCards[1].querySelector('img').src) { //vergelijken of plaatjes het zelfde zijn
-                    //als ze het zelfde 
-                        openCards[0].classList.add('boxMatch'); //de kaart blijft open
-                        openCards[0].classList.remove('boxOpen'); //maak de kaart niet meer actief
-
-                        openCards[1].classList.add('boxMatch'); //same
-                        openCards[1].classList.remove('boxOpen'); //same
-
-                        if (document.querySelectorAll('.boxMatch').length === shuffleKaarten.length) { //kijkt of je hebt gewonnen
-                            scoreList.push(Math.floor(clickCounter / 2)); //voeg score toe aan array
-                            // Verwijder scores totdat er maximaal 5 overblijven
+        //kaartkliks: telt kliks, checkt op matches, en toont succes of reset kaarten
+        box.addEventListener('click', function() { 
+            clickCounter++; 
+            document.querySelector('.clickCounter').innerText = Math.floor(clickCounter / 2); 
+            this.classList.add('cardFlipped'); 
+            let openCards = document.querySelectorAll('.cardFlipped'); 
+            if (openCards.length === 2) { 
+                setTimeout(() => { 
+                    if (openCards[0].querySelector('img').src === openCards[1].querySelector('img').src) { 
                         
-                        if (scoreList.length > 5) {
-                            scoreList = []; // Verwijdert het oudste (eerste) item in de lijst
+                        openCards[0].classList.add('keuzeCorrect');
+                        openCards[0].classList.remove('cardFlipped'); 
+
+                        openCards[1].classList.add('keuzeCorrect'); 
+                        openCards[1].classList.remove('cardFlipped'); 
+
+                        if (document.querySelectorAll('.keuzeCorrect').length === shuffleKaarten.length) { 
+                            scoreList.push(Math.floor(clickCounter / 2)); 
+
+                            if (scoreList.length > 5) {
+                                scoreList = []; 
+                            }
+                            localStorage.setItem('scores', JSON.stringify(scoreList)); 
+                            printScore(scoreList); 
+                            alert('Gefeliciteerd!'); 
                         }
-                            localStorage.setItem('scores', JSON.stringify(scoreList)); //slaat de score op in memory
-                            printScore(scoreList); //roept funcite aan voor updaten van scorelist
-                            alert('Gewonnen!'); //functie alert -> popup
-                        }
-                    } else { //als ze anders zijn
-                        openCards.forEach(card => card.classList.remove('boxOpen')); //flipt kaart terug loser.
+                    } else { 
+                        openCards.forEach(card => card.classList.remove('cardFlipped')); 
                     }
-                }, 500); //time out 500ms
+                }, 500); 
             }
         });
 
-        document.querySelector('.game').appendChild(box); //gaat een element in een ander element stoppen (box in de game)
+        document.querySelector('.game').appendChild(box); 
     }
 
-    const resetButton = document.querySelector('.reset'); 
+    // Herlaadt de pagina wanneer op de resetknop wordt geklikt.
+    const resetButton = document.querySelector('.reset');
     resetButton.addEventListener('click', () => window.location.reload());
 });
 
+
+// bronnen
+// code's: 
+// https://www.youtube.com/watch?v=bznJPt4t_4s&t=887s
+// https://www.youtube.com/watch?v=M0egyNvsN-Y 
+// https://www.w3schools.com/html/html_favicon.asp
+// afb: https://docplayer.nl/7592049-Cmd-brand-guide-versie-1-0-oktober-2014.html
