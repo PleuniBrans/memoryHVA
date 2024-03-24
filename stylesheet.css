@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #32278D;
+    background-color: #351FB7;
 }
 
 .container {
@@ -20,7 +20,7 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 30px;
-    background: white;
+    background: #25167A;
     padding: 40px 60px;
 }
 
@@ -34,8 +34,9 @@ h2 {
 .reset {
     padding: 15px 20px;
     color: white;
-    background: #32278D;
+    background: #F35279;
     border: none;
+    border-radius: 20px;
     font-size: 1.5em;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -45,7 +46,7 @@ h2 {
 
 .reset:focus {
     color: white;
-    background: #4F48E5;
+    background: #02857D;
 }
 
 .game {
@@ -70,14 +71,14 @@ h2 {
     transition: transform 0.5s;
     transform-style: preserve-3d;
   }
+
   
   .item::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: orange; 
-    /* opacity: ; */
+    background: #02857D; 
     transform: rotateY(0deg);
     backface-visibility: hidden; 
   }
@@ -105,7 +106,7 @@ h2 {
     width: 400px;
     height: 600px;
     border: 40px;
-    background-color: red;
+    background-color: #25167A;
     font-size: 2em;
     right: 10px;
     border-radius: 20px;
@@ -114,14 +115,28 @@ h2 {
 
   .score-box{
     padding: 30px;
+    color: white;
   }
 
   .scoreBoard h1 {
     width: 100%;
     text-align: center;
+    color: #F35279;
   }
 
   .tekstclick{
     font-size: 2em;
+    color: white;
   }
+
+ .container h2{
+  color: #F35279;
+ }
    
+ .clickCounter {
+  padding: 15px 20px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: larger;
+}

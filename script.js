@@ -26,22 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const kaartAfb = [ //array van kaartjes
-        'images/juiste-size-01.png',
-        'images/juiste-size-01.png',
-        'images/juiste-size-02.png',
-        'images/juiste-size-02.png',
-        'images/juiste-size-03.png',
-        'images/juiste-size-03.png',
-        'images/juiste-size-04.png',
-        'images/juiste-size-04.png',
-        'images/juiste-size-05.png',
-        'images/juiste-size-05.png',
-        'images/juiste-size-06.png',
-        'images/juiste-size-06.png',
-        'images/juiste-size-07.png',
-        'images/juiste-size-07.png',
-        'images/juiste-size-08.png',
-        'images/juiste-size-08.png'
+        'images/beker-kleur.svg',
+        'images/beker-kleur.svg',
+        'images/eenhoorn-kleur.svg',
+        'images/eenhoorn-kleur.svg',
+        'images/hva-kleur.svg',
+        'images/hva-kleur.svg',
+        'images/kaarten-kleur.svg',
+        'images/kaarten-kleur.svg',
+        'images/koptelefoon-kleur.svg',
+        'images/koptelefoon-kleur.svg',
+        'images/lampje-kleur.svg',
+        'images/lampje-kleur.svg',
+        'images/loop-kleur.svg',
+        'images/loop-kleur.svg',
+        'images/raket-kleur.svg',
+        'images/raket-kleur.svg'
     ];
 
   
